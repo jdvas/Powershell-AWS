@@ -1,0 +1,11 @@
+$bucketList = "bucket_1","bucket_2"
+
+foreach ($bucket in $bucketList) {
+  echo "exporting bucket info for " $bucket | Out-File -FilePath $path\s3-bucket-info.json -Append
+  echo "exporting bucket-encryption for " $bucket | Out-File -FilePath $path\s3-bucket-info.json -Append
+  aws s3api get-bucket-encryption --bucket $bucket >> $path\s3-bucket-info.json
+  echo "exporting bucket-policy for " $bucket | Out-File -FilePath $path\s3-bucket-info.json -Append
+  aws s3api get-bucket-policy --bucket $bucket >> $path\s3-bucket-info.json
+  echo "exporting bucket-acl for " $bucket | Out-File -FilePath $path\s3-bucket-info.json -Append
+  aws s3api get-bucket-acl --bucket $bucket >> $path\s3-bucket-info.json
+}
