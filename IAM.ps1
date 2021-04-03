@@ -20,7 +20,8 @@ foreach ($g in $grouplisting) {
     aws iam list-group-policies --group-name $g | Add-Content C:\aws\groups.json #IAM InlinePolicies
     echo "inspecting AWS IAM managed policies for group" $g | Out-File -FilePath C:\aws\groups.json -Append
     aws iam list-attached-group-policies --group-name $g | Add-Content C:\aws\groups.json #IAM Group policies
-
+    echo "listings members for group" $g | Out-File -FilePath C:\aws\groups.json -Append
+    aws iam get-group --group-name $g | Add-Content C:\aws\groups.json #members
 }}
 
 function role_listing{
